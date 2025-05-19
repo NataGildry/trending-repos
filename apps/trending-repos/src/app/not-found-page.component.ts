@@ -13,8 +13,8 @@ import { RouterLink } from '@angular/router';
           Please check the URL or return to the homepage.
         </p>
         <a
-          routerLink="/"
           class="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-6 rounded-full transition-colors duration-300"
+          routerLink="/"
         >
           Back to Homepage
         </a>
