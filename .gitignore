@@ -409,4 +409,4 @@ ciam/scripts/local-build-web.ps1
 .nx/
 
 # Angular cache
-.angular/
+.angular
