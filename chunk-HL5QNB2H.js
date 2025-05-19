@@ -1,1 +1,0 @@
-import{Fa as n,Ga as l,Ja as p,wa as o}from"./chunk-WASV22IO.js";var r=(()=>{class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=o({type:e,selectors:[["tr-shell"]],decls:2,vars:0,template:function(t,i){t&1&&(n(0,"p"),p(1,"Shell works!"),l())},encapsulation:2})}return e})();var f=[{path:"",loadComponent:()=>r}];export{f as shellRoutes};
