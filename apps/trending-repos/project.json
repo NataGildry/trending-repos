@@ -20,6 +20,11 @@
           {
             "glob": "**/*",
             "input": "apps/trending-repos/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/trending-repos/src/assets",
+            "output": "assets"
           }
         ],
         "styles": ["styles.css"],

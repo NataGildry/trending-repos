@@ -410,3 +410,4 @@ ciam/scripts/local-build-web.ps1
 
 # Angular cache
 .angular
+dist
