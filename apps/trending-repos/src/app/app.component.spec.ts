@@ -14,9 +14,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome trending-repos'
-    );
+    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome trending-repos');
   });
 
   it(`should have as title 'trending-repos'`, () => {

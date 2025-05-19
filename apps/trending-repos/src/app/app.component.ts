@@ -5,8 +5,6 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  standalone: true,
 })
-export class AppComponent {
-  title = 'trending-repos';
-}
+export class AppComponent {}

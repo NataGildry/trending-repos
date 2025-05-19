@@ -22,7 +22,7 @@
             "input": "apps/trending-repos/public"
           }
         ],
-        "styles": ["styles.scss"],
+        "styles": ["styles.css"],
         "scripts": []
       },
       "configurations": {
