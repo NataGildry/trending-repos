@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'tr-shell',
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './shell.component.html',
   standalone: true,
 })

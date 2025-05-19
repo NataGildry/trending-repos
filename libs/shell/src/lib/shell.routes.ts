@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-
-import ShellComponent from './shell/shell.component';
+import { featureGithubReposRoutes } from '@trending-repos/feature-github-repos';
 
 export const shellRoutes: Routes = [
   {
     path: '',
-    loadComponent: () => ShellComponent,
+    loadComponent: () => import('./shell/shell.component'),
+    children: [...featureGithubReposRoutes],
   },
 ];
