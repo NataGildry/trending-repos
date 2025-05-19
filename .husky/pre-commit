@@ -1,0 +1,4 @@
+# Print every command for better understanding of output
+set -o xtrace
+
+npx lint-staged --concurrent false --relative

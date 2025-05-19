@@ -1,30 +1,13 @@
-import nx from '@nx/eslint-plugin';
-import baseConfig from '../../../eslint.config.mjs';
+const nx = require('@nx/eslint-plugin');
+const baseConfig = require('../../../eslint.config.cjs');
 
-export default [
+module.exports = [
   ...baseConfig,
   ...nx.configs['flat/angular'],
   ...nx.configs['flat/angular-template'],
   {
     files: ['**/*.ts'],
-    rules: {
-      '@angular-eslint/directive-selector': [
-        'error',
-        {
-          type: 'attribute',
-          prefix: 'shared',
-          style: 'camelCase',
-        },
-      ],
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'shared',
-          style: 'kebab-case',
-        },
-      ],
-    },
+    rules: {},
   },
   {
     files: ['**/*.html'],
