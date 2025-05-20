@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiService } from '@trending-repos/shared/utils';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { GithubSearchResponse, GithubSearchResponseSchema } from '../models';
 
@@ -13,15 +13,13 @@ export type RepoFilters = {
   currentPage?: number;
   pageSize?: number;
   search?: string;
-  createdAfter: Date;
+  createdAfter?: Date;
 };
 
 @Injectable({
   providedIn: 'root',
 })
 export class GithubApiService extends ApiService {
-  public readonly repoUpdate$$ = new BehaviorSubject<void>(void 0);
-
   public fetchRepos(filters?: RepoFilters): Observable<GithubSearchResponse> {
     const defaultStartDate = new Date();
     defaultStartDate.setDate(defaultStartDate.getDate() - 30);

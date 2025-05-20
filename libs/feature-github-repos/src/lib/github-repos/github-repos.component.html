@@ -1,12 +1,26 @@
 <div class="w-[60vw] min-w-[320px] p-8 bg-slate-50 rounded-xl shadow">
   <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Trending Repos</h1>
 
-  @if (repos$ | async; as repos) { @if (repos !== 'loading') {
-  <ul class="flex flex-col gap-4">
-    @for (repo of repos.items; track $index) {
-    <shared-repo-card [repo]="repo" />
-    }
-  </ul>
+  @if (viewModel$ | async; as vm) { @if (vm.loadingStatus !== 'loading') {
+  <div
+    #scrolledContainer
+    class="h-[75vh] w-full overflow-y-auto pr-2"
+    infiniteScroll
+    [infiniteScrollContainer]="scrolledContainer"
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="300"
+    (scrolled)="onScroll()"
+  >
+    <ul class="flex flex-col gap-4">
+      @for (repo of vm.repos; track $index) {
+      <shared-repo-card [repo]="repo" />
+      } @if(vm.loadingStatus === 'appending') {
+      <div class="flex justify-center items-center">
+        <shared-progress-spinner ariaLabel="Loading more repos" />
+      </div>
+      }
+    </ul>
+  </div>
   } @else {
   <div class="flex items-center justify-center h-screen">
     <shared-progress-spinner ariaLabel="Loading repos" />
