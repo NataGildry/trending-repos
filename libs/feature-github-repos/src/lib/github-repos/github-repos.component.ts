@@ -7,6 +7,7 @@ import {
   RepoCardComponent,
   RepoDialogComponent,
 } from '@trending-repos/shared/ui';
+import { LocalStorageService } from '@trending-repos/shared/utils';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { BehaviorSubject, combineLatest, finalize, map, take, tap } from 'rxjs';
 
@@ -24,8 +25,11 @@ type LoadingStatus = 'none' | 'loading' | 'appending';
 export class GithubReposComponent {
   private readonly api = inject(GithubApiService);
   private readonly dialogService = inject(DynamicDialogService);
+  private readonly localStorage = inject(LocalStorageService);
   private readonly loadingStatus$$ = new BehaviorSubject<LoadingStatus>('none');
   private readonly repos$$ = new BehaviorSubject<GithubRepo[]>([]);
+  private readonly RATINGS_KEY = 'repoRatings';
+
   protected readonly filters = signal<RepoFilters>({
     currentPage: 1,
     pageSize: 30,
@@ -88,6 +92,10 @@ export class GithubReposComponent {
           if (!rating) {
             return;
           }
+
+          const currentRatings = this.localStorage.getItem<Record<number, number>>(this.RATINGS_KEY) ?? {};
+          const updatedRatings = { ...currentRatings, [repo.id]: rating };
+          this.localStorage.setItem(this.RATINGS_KEY, updatedRatings);
         })
       )
       .subscribe();
