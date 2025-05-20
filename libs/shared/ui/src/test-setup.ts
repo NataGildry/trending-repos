@@ -4,3 +4,6 @@ setupZoneTestEnv({
   errorOnUnknownElements: true,
   errorOnUnknownProperties: true,
 });
+
+/* eslint-disable import/first */
+import '@testing-library/jest-dom';
