@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import {
   DynamicDialogService,
   ProgressSpinnerComponent,
@@ -15,19 +15,21 @@ import { GithubApiService, RepoFilters } from '../api/github-api.service';
 import { GithubRepo } from '../models';
 
 type LoadingStatus = 'none' | 'loading' | 'appending';
+type RatedRepo = GithubRepo & { rate: number };
 
 @Component({
   selector: 'tr-github-repos',
   imports: [AsyncPipe, ProgressSpinnerComponent, RepoCardComponent, InfiniteScrollDirective],
   templateUrl: './github-repos.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GithubReposComponent {
   private readonly api = inject(GithubApiService);
   private readonly dialogService = inject(DynamicDialogService);
-  private readonly localStorage = inject(LocalStorageService);
+  private readonly localStorageService = inject(LocalStorageService);
   private readonly loadingStatus$$ = new BehaviorSubject<LoadingStatus>('none');
-  private readonly repos$$ = new BehaviorSubject<GithubRepo[]>([]);
+  private readonly repos$$ = new BehaviorSubject<RatedRepo[]>([]);
   private readonly RATINGS_KEY = 'repoRatings';
 
   protected readonly filters = signal<RepoFilters>({
@@ -37,7 +39,7 @@ export class GithubReposComponent {
 
   protected readonly loadingStatus$ = this.loadingStatus$$.asObservable();
   protected readonly viewModel$ = combineLatest([this.repos$$.asObservable(), this.loadingStatus$]).pipe(
-    map(([repos, loadingStatus]: [GithubRepo[], LoadingStatus]) => ({
+    map(([repos, loadingStatus]: [RatedRepo[], LoadingStatus]) => ({
       repos,
       loadingStatus,
     }))
@@ -63,7 +65,14 @@ export class GithubReposComponent {
       .pipe(
         take(1),
         tap((response) => {
-          this.repos$$.next([...(append ? this.repos$$.value : []), ...response.items]);
+          const allRatings = this.localStorageService.getItem<Record<number, number>>('repoRatings') ?? {};
+
+          const updatedRepos = response.items.map((repo) => ({
+            ...repo,
+            rate: allRatings[repo.id] ?? 0,
+          }));
+
+          this.repos$$.next([...(append ? this.repos$$.value : []), ...updatedRepos]);
         }),
         finalize(() => this.loadingStatus$$.next('none'))
       )
@@ -71,7 +80,7 @@ export class GithubReposComponent {
   }
 
   protected onRepoSelected(repo: RepoCard): void {
-    const ref = this.dialogService.show(
+    const dialogRef = this.dialogService.show(
       RepoDialogComponent,
       { repo },
       {
@@ -85,7 +94,7 @@ export class GithubReposComponent {
       }
     );
 
-    ref.onClose
+    dialogRef.onClose
       .pipe(
         take(1),
         tap((rating: number | undefined) => {
@@ -93,9 +102,12 @@ export class GithubReposComponent {
             return;
           }
 
-          const currentRatings = this.localStorage.getItem<Record<number, number>>(this.RATINGS_KEY) ?? {};
+          const currentRatings = this.localStorageService.getItem<Record<number, number>>(this.RATINGS_KEY) ?? {};
           const updatedRatings = { ...currentRatings, [repo.id]: rating };
-          this.localStorage.setItem(this.RATINGS_KEY, updatedRatings);
+          const updatedRepos = this.repos$$.value.map((r) => (r.id === repo.id ? { ...r, rate: rating } : r));
+
+          this.localStorageService.setItem(this.RATINGS_KEY, updatedRatings);
+          this.repos$$.next(updatedRepos);
         })
       )
       .subscribe();

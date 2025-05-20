@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'shared-badge',
@@ -8,6 +8,7 @@ import { Component, input } from '@angular/core';
     {{ label() }}: {{ value() | number }}
   </span>`,
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeComponent {
   public readonly value = input.required<number>();

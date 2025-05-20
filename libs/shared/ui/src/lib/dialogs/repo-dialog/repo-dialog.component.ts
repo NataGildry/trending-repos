@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { take, tap } from 'rxjs';
@@ -12,6 +12,7 @@ import { StarRatingComponent } from '../../form';
   imports: [NgOptimizedImage, StarRatingComponent, ReactiveFormsModule, BadgeComponent],
   templateUrl: './repo-dialog.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RepoDialogComponent {
   protected readonly config = inject(DynamicDialogConfig);
