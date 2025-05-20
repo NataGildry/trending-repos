@@ -1,14 +1,15 @@
-import { DecimalPipe, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { take, tap } from 'rxjs';
 
+import { BadgeComponent } from '../../badge/badge.component';
 import { StarRatingComponent } from '../../form';
 
 @Component({
   selector: 'shared-repo-dialog',
-  imports: [DecimalPipe, NgOptimizedImage, StarRatingComponent, ReactiveFormsModule],
+  imports: [NgOptimizedImage, StarRatingComponent, ReactiveFormsModule, BadgeComponent],
   templateUrl: './repo-dialog.component.html',
   standalone: true,
 })

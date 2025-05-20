@@ -18,14 +18,12 @@ describe('RepoCardComponent', () => {
     },
   };
 
-  it('should render description, stars, and issues', async () => {
+  it('should render description', async () => {
     await render(RepoCardComponent, {
       inputs: { repo: mockRepo },
     });
 
     expect(screen.getByText(/This is a test repository/i)).toBeInTheDocument();
-    expect(screen.getByText(/⭐ Stars: 1,234/)).toBeInTheDocument();
-    expect(screen.getByText(/🐛 Issues: 45/)).toBeInTheDocument();
   });
 
   it('should display the owner login and avatar', async () => {

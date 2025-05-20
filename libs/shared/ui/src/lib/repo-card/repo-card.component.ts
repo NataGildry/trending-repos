@@ -1,5 +1,7 @@
-import { DecimalPipe, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { Component, input, output } from '@angular/core';
+
+import { BadgeComponent } from '../badge/badge.component';
 
 type RepoOwner = {
   login: string;
@@ -18,7 +20,7 @@ export type RepoCard = {
 
 @Component({
   selector: 'shared-repo-card',
-  imports: [DecimalPipe, NgOptimizedImage],
+  imports: [NgOptimizedImage, BadgeComponent],
   templateUrl: './repo-card.component.html',
   standalone: true,
 })

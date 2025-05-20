@@ -33,12 +33,10 @@
     </a>
 
     <div class="flex flex-wrap items-center gap-4 text-sm mt-2 text-gray-800">
-      <span class="px-2 py-1 bg-white rounded-md shadow border border-gray-200">
-        ⭐ Stars: {{ repo.stargazers_count | number }}
-      </span>
-      <span class="px-2 py-1 bg-white rounded-md shadow border border-gray-200">
-        🐛 Issues: {{ repo.open_issues_count | number }}
-      </span>
+      <div class="flex flex-wrap items-center gap-4 text-sm mt-2 text-gray-800">
+        <shared-badge label="⭐ Stars:" [value]="repo.stargazers_count" />
+        <shared-badge label="🐛 Issues:" [value]="repo.open_issues_count" />
+      </div>
     </div>
 
     <!-- Star Rating -->
