@@ -1,1 +1,1 @@
-export * from './lib/utils/utils.component';
+export { ApiService } from './lib/api-service.abstract';

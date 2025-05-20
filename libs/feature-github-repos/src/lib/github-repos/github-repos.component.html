@@ -1,3 +1,23 @@
-<div class="w-full min-w-[320px] max-w-[50vw] p-8 bg-slate-50 rounded-xl shadow">
+<div class="w-[60vw] min-w-[320px] p-8 bg-slate-50 rounded-xl shadow">
   <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Trending Repos</h1>
+
+  @if (repos$ | async; as repos) { @if (repos !== 'loading') {
+  <ul>
+    @for (repo of repos.items; track $index) {
+    <li>
+      <h3>
+        <a target="_blank" [href]="repo.html_url">{{ repo.name }}</a>
+      </h3>
+      <p>{{ repo.description }}</p>
+      <p>⭐ Stars: {{ repo.stargazers_count }}</p>
+      <p>🐛 Open Issues: {{ repo.open_issues_count }}</p>
+      <p>👤 Owner: {{ repo.owner.login }}</p>
+    </li>
+    }
+  </ul>
+  } @else {
+  <div class="flex items-center justify-center h-screen">
+    <shared-progress-spinner ariaLabel="Loading repos" />
+  </div>
+  } }
 </div>

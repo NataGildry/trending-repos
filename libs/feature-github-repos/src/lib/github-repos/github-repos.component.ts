@@ -1,9 +1,23 @@
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ProgressSpinnerComponent } from '@trending-repos/shared/ui';
+import { Observable, startWith, switchMap } from 'rxjs';
+
+import { GithubApiService } from '../api/github-api.service';
+import { GithubSearchResponse } from '../models';
 
 @Component({
   selector: 'tr-github-repos',
-  imports: [],
+  imports: [AsyncPipe, ProgressSpinnerComponent],
   templateUrl: './github-repos.component.html',
   standalone: true,
 })
-export class GithubReposComponent {}
+export class GithubReposComponent {
+  private readonly api = inject(GithubApiService);
+  private readonly updateTrigger$ = this.api.repoUpdate$$;
+
+  protected readonly repos$: Observable<GithubSearchResponse | 'loading'> = this.updateTrigger$.pipe(
+    switchMap(() => this.api.fetchRepos()),
+    startWith('loading' as const)
+  );
+}
