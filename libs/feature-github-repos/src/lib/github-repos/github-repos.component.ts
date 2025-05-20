@@ -67,7 +67,7 @@ export class GithubReposComponent {
   }
 
   protected onRepoSelected(repo: RepoCard): void {
-    this.dialogService.show(
+    const ref = this.dialogService.show(
       RepoDialogComponent,
       { repo },
       {
@@ -80,5 +80,16 @@ export class GithubReposComponent {
         modal: true,
       }
     );
+
+    ref.onClose
+      .pipe(
+        take(1),
+        tap((rating: number | undefined) => {
+          if (!rating) {
+            return;
+          }
+        })
+      )
+      .subscribe();
   }
 }

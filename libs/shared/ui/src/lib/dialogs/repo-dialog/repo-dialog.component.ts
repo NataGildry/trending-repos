@@ -1,13 +1,28 @@
 import { DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { take, tap } from 'rxjs';
+
+import { StarRatingComponent } from '../../form';
 
 @Component({
   selector: 'shared-repo-dialog',
-  imports: [DecimalPipe, NgOptimizedImage],
+  imports: [DecimalPipe, NgOptimizedImage, StarRatingComponent, ReactiveFormsModule],
   templateUrl: './repo-dialog.component.html',
   standalone: true,
 })
 export class RepoDialogComponent {
   protected readonly config = inject(DynamicDialogConfig);
+  protected readonly ref = inject(DynamicDialogRef);
+  protected readonly ratingControl = new FormControl(0);
+
+  public constructor() {
+    this.ratingControl.valueChanges
+      .pipe(
+        take(1),
+        tap(() => this.ref.close(this.ratingControl.value ?? 0))
+      )
+      .subscribe();
+  }
 }
