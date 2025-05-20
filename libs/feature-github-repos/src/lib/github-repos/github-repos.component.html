@@ -13,7 +13,7 @@
   >
     <ul class="flex flex-col gap-4">
       @for (repo of vm.repos; track $index) {
-      <shared-repo-card [repo]="repo" />
+      <shared-repo-card [repo]="repo" (repoSelected)="onRepoSelected($event)" />
       } @if(vm.loadingStatus === 'appending') {
       <div class="flex justify-center items-center">
         <shared-progress-spinner ariaLabel="Loading more repos" />

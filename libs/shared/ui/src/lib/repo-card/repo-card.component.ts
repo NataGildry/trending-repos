@@ -1,5 +1,5 @@
 import { DecimalPipe, NgOptimizedImage } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 type RepoOwner = {
   login: string;
@@ -24,4 +24,5 @@ export type RepoCard = {
 })
 export class RepoCardComponent {
   public readonly repo = input.required<RepoCard>();
+  public readonly repoSelected = output<RepoCard>();
 }

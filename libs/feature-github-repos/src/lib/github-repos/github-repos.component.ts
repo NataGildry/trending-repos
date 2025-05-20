@@ -1,6 +1,12 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { ProgressSpinnerComponent, RepoCardComponent } from '@trending-repos/shared/ui';
+import {
+  DynamicDialogService,
+  ProgressSpinnerComponent,
+  RepoCard,
+  RepoCardComponent,
+  RepoDialogComponent,
+} from '@trending-repos/shared/ui';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { BehaviorSubject, combineLatest, finalize, map, take, tap } from 'rxjs';
 
@@ -17,6 +23,7 @@ type LoadingStatus = 'none' | 'loading' | 'appending';
 })
 export class GithubReposComponent {
   private readonly api = inject(GithubApiService);
+  private readonly dialogService = inject(DynamicDialogService);
   private readonly loadingStatus$$ = new BehaviorSubject<LoadingStatus>('none');
   private readonly repos$$ = new BehaviorSubject<GithubRepo[]>([]);
   protected readonly filters = signal<RepoFilters>({
@@ -57,5 +64,21 @@ export class GithubReposComponent {
         finalize(() => this.loadingStatus$$.next('none'))
       )
       .subscribe();
+  }
+
+  protected onRepoSelected(repo: RepoCard): void {
+    this.dialogService.show(
+      RepoDialogComponent,
+      { repo },
+      {
+        header: `⭐ Rate Repository: ${repo.name}`,
+        width: '50%',
+        contentStyle: { 'max-height': '90vh' },
+        baseZIndex: 10000,
+        closable: true,
+        dismissableMask: true,
+        modal: true,
+      }
+    );
   }
 }
