@@ -1,1 +1,43 @@
-<p>Ui works!</p>
+<li class="flex gap-4 p-4 rounded-xl bg-blue-50 shadow-sm overflow-hidden">
+  @if (repo().owner; as owner) {
+  <div class="flex flex-col gap-4">
+    <img
+      class="w-16 h-16 rounded-full object-cover shrink-0"
+      height="64"
+      width="64"
+      [alt]="owner.login + ' avatar'"
+      [ngSrc]="owner.avatar_url"
+    />
+
+    <h3 class="text-lg font-semibold text-gray-900 truncate">
+      {{ owner.login }}
+    </h3>
+  </div>
+  }
+
+  <div class="flex flex-col gap-1 min-w-0 overflow-hidden">
+    <h3 class="text-lg font-semibold text-gray-900 truncate">Repository name: {{ repo().name }}</h3>
+
+    <p class="text-gray-700 text-sm break-words">
+      {{ repo().description }}
+    </p>
+
+    <a
+      class="text-blue-600 text-sm hover:underline break-all"
+      rel="noopener noreferrer"
+      target="_blank"
+      [href]="repo().html_url"
+    >
+      {{ repo().html_url }}
+    </a>
+
+    <div class="flex flex-wrap items-center gap-4 text-sm mt-2 text-gray-800">
+      <span class="px-2 py-1 bg-white rounded-md shadow border border-gray-200">
+        ⭐ Stars: {{ repo().stargazers_count | number }}
+      </span>
+      <span class="px-2 py-1 bg-white rounded-md shadow border border-gray-200">
+        🐛 Issues: {{ repo().open_issues_count | number }}
+      </span>
+    </div>
+  </div>
+</li>

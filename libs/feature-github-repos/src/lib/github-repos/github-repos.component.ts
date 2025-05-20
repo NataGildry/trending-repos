@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ProgressSpinnerComponent } from '@trending-repos/shared/ui';
+import { ProgressSpinnerComponent, RepoCardComponent } from '@trending-repos/shared/ui';
 import { Observable, startWith, switchMap } from 'rxjs';
 
 import { GithubApiService } from '../api/github-api.service';
@@ -8,7 +8,7 @@ import { GithubSearchResponse } from '../models';
 
 @Component({
   selector: 'tr-github-repos',
-  imports: [AsyncPipe, ProgressSpinnerComponent],
+  imports: [AsyncPipe, ProgressSpinnerComponent, RepoCardComponent],
   templateUrl: './github-repos.component.html',
   standalone: true,
 })

@@ -2,17 +2,9 @@
   <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Trending Repos</h1>
 
   @if (repos$ | async; as repos) { @if (repos !== 'loading') {
-  <ul>
+  <ul class="flex flex-col gap-4">
     @for (repo of repos.items; track $index) {
-    <li>
-      <h3>
-        <a target="_blank" [href]="repo.html_url">{{ repo.name }}</a>
-      </h3>
-      <p>{{ repo.description }}</p>
-      <p>⭐ Stars: {{ repo.stargazers_count }}</p>
-      <p>🐛 Open Issues: {{ repo.open_issues_count }}</p>
-      <p>👤 Owner: {{ repo.owner.login }}</p>
-    </li>
+    <shared-repo-card [repo]="repo" />
     }
   </ul>
   } @else {
