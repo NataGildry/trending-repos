@@ -60,5 +60,4 @@ The project is organized as an Nx monorepo with a clear modular structure to mai
 - **shell**: The main application shell responsible for bootstrapping the app, routing, and layout management.
 - **shared-ui**: A standalone UI library containing reusable presentation components such as buttons, cards, dialogs, and other common UI elements styled with Tailwind CSS.
 - **shared-utils**: Contains utility functions and services that can be shared across multiple parts of the app to promote DRY principles and consistency.
-
 ![Frontend Architecture Diagram](assets/front-end.drawio.png)
