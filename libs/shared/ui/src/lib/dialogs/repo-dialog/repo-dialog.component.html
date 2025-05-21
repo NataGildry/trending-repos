@@ -20,8 +20,9 @@
 
     <div class="flex flex-wrap items-center gap-4 text-sm mt-2 text-gray-800">
       <div class="flex flex-wrap items-center gap-4 text-sm mt-2 text-gray-800">
-        <shared-badge label="⭐ Stars:" [value]="repo.stargazers_count" />
-        <shared-badge label="🐛 Issues:" [value]="repo.open_issues_count" />
+        <shared-badge label="⭐ Stars" [value]="repo.stargazers_count | number" />
+        <shared-badge label="🐛 Issues" [value]="repo.open_issues_count | number" />
+        <shared-badge label="📅 Created" [value]="repo.created_at | date : 'mediumDate'" />
       </div>
     </div>
 

@@ -13,6 +13,7 @@ describe('RepoCardComponent', () => {
     stargazers_count: 1234,
     open_issues_count: 45,
     rate: 5,
+    created_at: '2023-01-01T00:00:00Z',
     owner: {
       login: 'testuser',
       avatar_url: 'https://test',

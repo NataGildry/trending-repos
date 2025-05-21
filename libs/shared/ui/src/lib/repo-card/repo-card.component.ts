@@ -1,3 +1,4 @@
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 import { BadgeComponent } from '../badge/badge.component';
@@ -18,11 +19,12 @@ export type RepoCard = {
   html_url: string;
   owner: RepoOwner;
   rate: number;
+  created_at: string;
 };
 
 @Component({
   selector: 'shared-repo-card',
-  imports: [BadgeComponent, RatingDisplayComponent, UserCardComponent],
+  imports: [BadgeComponent, RatingDisplayComponent, UserCardComponent, DatePipe, DecimalPipe],
   templateUrl: './repo-card.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

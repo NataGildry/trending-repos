@@ -1,3 +1,4 @@
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -21,6 +22,7 @@ type Repo = {
   html_url: string;
   owner: Owner;
   rate: number;
+  created_at: string;
 };
 
 export interface RepoDialogData {
@@ -38,7 +40,7 @@ function isRepoDialogData(data: unknown): data is RepoDialogData {
 
 @Component({
   selector: 'shared-repo-dialog',
-  imports: [StarRatingComponent, ReactiveFormsModule, BadgeComponent, UserCardComponent],
+  imports: [StarRatingComponent, ReactiveFormsModule, BadgeComponent, UserCardComponent, DatePipe, DecimalPipe],
   templateUrl: './repo-dialog.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -9,18 +9,18 @@ describe('BadgeComponent', () => {
     await render(BadgeComponent, {
       inputs: {
         label: '⭐ Stars',
-        value: 1234,
+        value: '1234',
       },
     });
 
-    expect(screen.getByText('⭐ Stars: 1,234')).toBeInTheDocument();
+    expect(screen.getByText('⭐ Stars: 1234')).toBeInTheDocument();
   });
 
   it('should render label and value for issues', async () => {
     await render(BadgeComponent, {
       inputs: {
         label: '🐛 Issues',
-        value: 45,
+        value: '45',
       },
     });
 

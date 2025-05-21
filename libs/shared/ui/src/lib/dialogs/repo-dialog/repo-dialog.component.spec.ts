@@ -14,6 +14,7 @@ describe('RepoDialogComponent', () => {
     html_url: 'https://test',
     stargazers_count: 1234,
     open_issues_count: 45,
+    created_at: '2023-01-01T00:00:00Z',
     rate: 4,
     owner: {
       login: 'testuser',

@@ -13,6 +13,7 @@ export const GithubRepoSchema = z.object({
   open_issues_count: z.number(),
   html_url: z.string().url(),
   owner: GithubOwnerSchema,
+  created_at: z.string().datetime(),
 });
 
 export const GithubSearchResponseSchema = z.object({
