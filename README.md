@@ -1,17 +1,39 @@
-# trending-repos
+# Trending Repos Web App
 
-A lightweight web app that displays the most starred GitHub repositories created in the last 30 days. Built with Angular and powered by the GitHub REST API
+![App screenshot](docs/assets/screenshot-2.png)
 
-## Run tasks
+## Table of Contents
 
-To run the dev server for your app, use:
+- [Project Overview](#project-overview)
+- [How to Run](#how-to-run)
+  - [Development Server](#development-server)
+  - [Production Build](#production-build)
+- [Author](#author)
 
-```sh
+  👉 See [PROJECT.md](docs/PROJECT.md) for full implementation details.
+
+## Project Overview
+
+This is a lightweight Angular web application that lists the most starred GitHub repositories created in the last 30 days. The app fetches live data from the GitHub REST API and displays it in a user-friendly, paginated list format.
+
+---
+
+## How to Run
+
+### Development Server
+
+```bash
 npx nx serve trending-repos
 ```
 
-To create a production bundle:
+### Production Build
 
-```sh
+```bash
 npx nx build trending-repos
 ```
+
+---
+
+## Author
+
+Nataliia Podpriatova

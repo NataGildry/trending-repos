@@ -12,6 +12,7 @@ describe('RepoCardComponent', () => {
     html_url: 'https://test',
     stargazers_count: 1234,
     open_issues_count: 45,
+    rate: 5,
     owner: {
       login: 'testuser',
       avatar_url: 'https://test',
