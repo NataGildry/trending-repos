@@ -1,6 +1,6 @@
 # Trending Repos Web App
 
-![App screenshot](docs/assets/screenshot-2.png)
+![App screenshot](docs/assets/app-screenshot.png)
 
 ## Table of Contents
 
