@@ -53,6 +53,9 @@ Currently, only the shared-ui library is covered by unit tests. This is because 
 
 ![Test results](assets/screenshot-1.png)
 
+This shows the test coverage for the `shared-ui` library, including how much of the code is tested.
+![Test coverage shared ui lib](assets/test-coverage.png)
+
 ## Code Quality and Structure
 
 The project is organized as an Nx monorepo with a clear modular structure to maintain scalability and reusability:
