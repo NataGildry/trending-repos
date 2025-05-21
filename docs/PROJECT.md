@@ -34,6 +34,7 @@
 - **GitHub REST API:** Source for repository data.
 - **Tailwind CSS:** For utility-first styling and responsive design.
 - **Testing Library:** For robust and accessible Angular component testing.
+- **ngx-infinite-scroll:** Used to implement infinite loading of GitHub repositories as the user scrolls.
 
 ---
 
