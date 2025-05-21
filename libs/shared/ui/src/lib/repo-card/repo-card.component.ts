@@ -1,8 +1,8 @@
-import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 import { BadgeComponent } from '../badge/badge.component';
 import { RatingDisplayComponent } from '../rating-display/repo-card.component';
+import { UserCardComponent } from '../user-card/user-card.component';
 
 type RepoOwner = {
   login: string;
@@ -22,7 +22,7 @@ export type RepoCard = {
 
 @Component({
   selector: 'shared-repo-card',
-  imports: [NgOptimizedImage, BadgeComponent, RatingDisplayComponent],
+  imports: [BadgeComponent, RatingDisplayComponent, UserCardComponent],
   templateUrl: './repo-card.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

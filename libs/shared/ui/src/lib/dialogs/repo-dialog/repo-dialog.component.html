@@ -1,19 +1,5 @@
 <li class="flex gap-4 p-4 rounded-xl bg-white overflow-hidden">
-  @if (this.config.data.repo.owner; as owner) {
-  <div class="flex flex-col gap-4">
-    <img
-      class="w-16 h-16 rounded-full object-cover shrink-0"
-      height="64"
-      width="64"
-      [alt]="owner.login + ' avatar'"
-      [ngSrc]="owner.avatar_url"
-    />
-
-    <h3 class="text-lg font-semibold text-gray-900 truncate">
-      {{ owner.login }}
-    </h3>
-  </div>
-  }
+  <shared-user-card class="shrink-0" [user]="this.config.data.repo.owner" />
 
   <div class="flex flex-col gap-1 min-w-0 overflow-hidden">
     @if (this.config.data.repo; as repo) {
